@@ -1,10 +1,11 @@
 # -*- mode: dockerfile -*-
 # dockerfile to build libmxnet.so on CPU
-FROM ubuntu:14.04
+# FROM ubuntu:14.04
+FROM resin/rpi-raspbian
 
 COPY install/cpp.sh install/
 RUN install/cpp.sh
 
-RUN git clone --recursive https://github.com/dmlc/mxnet && cd mxnet && \
-    make -j$(nproc) && \
+RUN git clone --recursive https://github.com/lzhou-arch/incubator-mxnet.git && cd incubator-mxnet && \
+    make -j$(nproc) USE_OPENCV=1 USE_BLAS=openblas USE_DIST_KVSTORE=1 USE_SSE=0 && \
     rm -r build

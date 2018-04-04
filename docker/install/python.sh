@@ -19,7 +19,8 @@
 
 # install libraries for mxnet's python package on ubuntu
 
-apt-get update && apt-get install -y python-dev python3-dev
+apt-get update && apt-get install -y python-dev python3-dev \
+    python-setuptools python-pip libgfortran3
 
 # the version of the pip shipped with ubuntu may be too lower, install a recent version here
 cd /tmp && wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py && python2 get-pip.py
