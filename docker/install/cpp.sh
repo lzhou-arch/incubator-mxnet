@@ -21,7 +21,7 @@
 
 apt-get update && apt-get install -y \
     build-essential git libatlas-base-dev libopencv-dev python-opencv \
-    libcurl4-openssl-dev libgtest-dev cmake wget unzip \
-    libopenblas-dev liblapack-dev
+    libopenblas-dev liblapack-dev libcurl4-openssl-dev libgtest-dev \
+    cmake wget unzip sudo vim
 
 cd /usr/src/gtest && cmake CMakeLists.txt && make && cp *.a /usr/lib

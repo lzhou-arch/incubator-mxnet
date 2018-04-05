@@ -65,7 +65,7 @@ else
     DOCKER_BINARY="docker"
 fi
 
-DOCKER_TAG="lzhouarch/mxnet_${LANGUAGE}"
+DOCKER_TAG="lzhouarch/mxnet-rpi"
 if [ "${DEVICE}" != 'cpu' ]; then
     DOCKER_TAG="${DOCKER_TAG}:${DEVICE}"
 fi

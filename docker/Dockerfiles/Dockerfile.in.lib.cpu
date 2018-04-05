@@ -1,11 +1,27 @@
 # -*- mode: dockerfile -*-
-# dockerfile to build libmxnet.so on CPU
-# FROM ubuntu:14.04
+# dockerfile to build libmxnet.so on Raspberry Pi
 FROM resin/rpi-raspbian
 
+USER root
+
+# install c++ libs
 COPY install/cpp.sh install/
 RUN install/cpp.sh
 
-RUN git clone --recursive https://github.com/lzhou-arch/incubator-mxnet.git && cd incubator-mxnet && \
+#### ADD DEFAULT USER ####
+ARG USER=mpi
+ENV USER ${USER}
+RUN adduser --disabled-password ${USER} \
+      && echo "${USER}   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+ENV USER_HOME /home/${USER}
+RUN chown -R ${USER}:${USER} ${USER_HOME}
+
+USER ${USER}
+
+# compile mxnet
+
+RUN cd ${USER_HOME} && \
+    git clone --recursive https://github.com/lzhou-arch/incubator-mxnet.git mxnet && cd mxnet && \
     make -j$(nproc) USE_OPENCV=1 USE_BLAS=openblas USE_DIST_KVSTORE=1 USE_SSE=0 && \
     rm -r build
