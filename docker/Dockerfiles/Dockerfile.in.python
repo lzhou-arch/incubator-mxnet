@@ -7,15 +7,16 @@ COPY install/python.sh install/
 RUN install/python.sh
 ENV PYTHONPATH=${USER_HOME}/mxnet/python
 
-USER ${USER}
+# USER ${USER}
 
 # Complete output from command python setup.py egg_info:
+# qemu: uncaught target signal 4 (Illegal instruction) - core dumped
 # Command "python setup.py egg_info" failed with error code -11 in /mxnet/python/
 # The command '/bin/sh -c cd mxnet/python &&  pip install --upgrade pip && pip install -e .' returned a non-zero code: 1
 #
 
-RUN cd ${USER_HOME}/mxnet/python && \
-    pip install --upgrade pip && \
-    pip install -e .
-
-USER root
+# RUN cd ${USER_HOME}/mxnet/python && \
+#     pip install --upgrade pip && \
+#     sodo pip install -e .
+#
+# USER root
